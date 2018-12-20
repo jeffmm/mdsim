@@ -10,8 +10,7 @@ class MDSim {
     void Init();
   public:
     MDSim();
-    void SetParams(int n_dim, int n_periodic, int n_particles,
-                   int n_steps, double box_size, double delta);
+    void SetParams(parameters params);
     void Run();
 };
 

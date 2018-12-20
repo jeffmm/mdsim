@@ -4,6 +4,8 @@
 typedef double double3[3];
 
 #include <iostream> 
+#include "parameters.h"
+#include "rng.h"
 
 class Particle {
   private:
@@ -14,11 +16,17 @@ class Particle {
            rad_ = 1,
            delta_ = 0.001;
 
+    //RNG rng_;
+    parameters * params_;
     void InitRandom();
 
   public:
-    Particle() {}
-    void Init(int n_dim, double delta);
+    Particle() {
+      std::fill(pos_,pos_+3,0.0);
+      std::fill(spos_,spos_+3,0.0);
+      std::fill(vel_,vel_+3,0.0);
+    }
+    void Init(parameters * params);
     void SetRadius(double r);
     void SetPosition(const double p[]);
     void SetScaledPosition(const double sp[]);

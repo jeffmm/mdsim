@@ -5,4 +5,5 @@ _generate/
 *.so
 *.py[cod]
 *.egg-info
+*.swp
 *.ipynb_checkpoints

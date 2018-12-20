@@ -11,7 +11,7 @@ void Simulation::InitParticles() {
   particles_.resize(params_->n_particles);
   for (auto it = particles_.begin(); it != particles_.end(); ++it) {
     /* Initialize particle positions */
-    it->Init(params_->n_dim, params_->delta);
+    it->Init(params_);
 
     /* Update periodic boundary conditions */
     double ds[3];

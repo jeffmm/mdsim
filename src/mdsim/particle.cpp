@@ -1,8 +1,11 @@
-#include "mdsim.h"
+#include "particle.h"
 
-void Particle::Init(int n_dim, double delta) {
-  n_dim_ = n_dim;
-  delta_ = delta;
+void Particle::Init(parameters * params) {
+  params_ = params;
+  n_dim_ = params_->n_dim;
+  delta_ = params_->delta;
+  //rng_.Init(params_->seed);
+  //params_->seed = gsl_rng_get(rng_.r);
   InitRandom();
 }
 
@@ -29,10 +32,14 @@ void Particle::SetVelocity(const double v[]) {
 }
 
 void Particle::InitRandom() {
-  double dr[3] = {0,0,0};
-  SetPosition(dr);
-  double v[3] = {1,0,0};
-  SetVelocity(v);
+  //rng_.RandomUniformVector(n_dim_,pos_);
+  //for (int i=0; i<n_dim_; ++i) {
+    //pos_[i] = pos_[i] * params_->box_size;
+  //}
+  //rng_.RandomUnitVector(n_dim_, vel_);
+  //for (int i=0; i<n_dim_; ++i) {
+    //vel_[i] = vel_[i] * params_->velocity;
+  //}
 }
 
 double Particle::GetVelocitySquared() {

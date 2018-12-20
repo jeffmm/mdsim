@@ -17,13 +17,16 @@ PYBIND11_MODULE(mdsim, m) {
            subtract
     )pbdoc";
 
-    m.def("add", &add, R"pbdoc(
-        Add two numbers
-    )pbdoc");
+    py::class_<Particle>(m, "Particle")
+        .def(py::init<const double, const double, const double, const double>())
+        .def("setRadius", &Particle::setRadius)
+        .def("setPositionX", &Particle::setPosition)
+        .def("getRadius", &Particle::getRadius)
+        .def("getPositionX", &Particle::getPositionX)
+        .def("getPositionY", &Particle::getPositionY)
+        .def("getPositionZ", &Particle::getPositionZ)
+        .def("getStatus", &Particle::getStatus);
 
-    m.def("subtract", &subtract, R"pbdoc(
-        Subtract second number from first number
-    )pbdoc");
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

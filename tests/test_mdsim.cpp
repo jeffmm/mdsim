@@ -2,7 +2,10 @@
 
 #include "mdsim.h"
 
-TEST_CASE("Addition and subtraction") {
-  REQUIRE(add(1, 1) == 2);
-  REQUIRE(subtract(2, 3) == -1);
+TEST_CASE("Particle instantiation") {
+  Particle p(1,2,3,4);
+  REQUIRE(p.getPositionX() == 1);
+  REQUIRE(p.getPositionY() == 2);
+  REQUIRE(p.getPositionZ() == 3);
+  REQUIRE(p.getRadius() == 4);
 }

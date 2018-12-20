@@ -1,21 +1,18 @@
-#ifndef _MDSIM_PARTICLE_H_
-#define _MDSIM_PARTICLE_H_
+#ifndef _MDSIM_MAIN_H_
+#define _MDSIM_MAIN_H_
 
-#include <iostream>
+#include "simulation.h"
 
-class Particle {
+class MDSim {
   private:
-    double pos_[3],
-           rad_;
+    Simulation sim_;
+    parameters params_;
+    void Init();
   public:
-    Particle(double x1, double x2, double x3, double r);
-    void setRadius(double r);
-    void setPosition(double x1, double x2, double x3);
-    double const getRadius() const;
-    double const getPositionX() const;
-    double const getPositionY() const;
-    double const getPositionZ() const;
-    void getStatus();
+    MDSim();
+    void SetParams(int n_dim, int n_periodic, int n_particles,
+                   int n_steps, double box_size, double delta);
+    void Run();
 };
 
-#endif // _MDSIM_PARTICLE_H_
+#endif // _MDSIM_MAIN_H_

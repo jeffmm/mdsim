@@ -13,19 +13,26 @@ PYBIND11_MODULE(mdsim, m) {
         .. autosummary::
            :toctree: _generate
 
-           add
-           subtract
+        Params
+        Sim
     )pbdoc";
 
-    py::class_<Particle>(m, "Particle")
-        .def(py::init<const double, const double, const double, const double>())
-        .def("setRadius", &Particle::setRadius)
-        .def("setPositionX", &Particle::setPosition)
-        .def("getRadius", &Particle::getRadius)
-        .def("getPositionX", &Particle::getPositionX)
-        .def("getPositionY", &Particle::getPositionY)
-        .def("getPositionZ", &Particle::getPositionZ)
-        .def("getStatus", &Particle::getStatus);
+    //py::class_<Particle>(m, "Particle")
+        //.def(py::init<const double, const double, const double, const double>())
+        //.def("setRadius", &Particle::setRadius)
+        //.def("setPositionX", &Particle::setPosition)
+        //.def("getRadius", &Particle::getRadius)
+        //.def("getPositionX", &Particle::getPositionX)
+        //.def("getPositionY", &Particle::getPositionY)
+        //.def("getPositionZ", &Particle::getPositionZ)
+        //.def("getStatus", &Particle::getStatus);
+    py::class_<parameters>(m, "Params")
+      .def(py::init<>());
+
+    py::class_<MDSim>(m, "Sim")
+      .def(py::init<>())
+      .def("setParams", &MDSim::SetParams)
+      .def("run", &MDSim::Run);
 
 
 #ifdef VERSION_INFO

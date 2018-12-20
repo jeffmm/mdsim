@@ -4,7 +4,10 @@ project(mdsim)
 set(SOURCE_DIR "src/mdsim")
 include_directories(${SOURCE_DIR})
 #file(GLOB_RECURSE SOURCES RELATIVE ${SOURCE_DIR} "src/*.cpp")
-set(SOURCES "${SOURCE_DIR}/mdsim.cpp")
+set(SOURCES "${SOURCE_DIR}/mdsim.cpp"
+            "${SOURCE_DIR}/particle.cpp"
+            "${SOURCE_DIR}/space.cpp"
+            "${SOURCE_DIR}/simulation.cpp")
 
 add_subdirectory(lib/pybind11)
 pybind11_add_module(mdsim ${SOURCES} "${SOURCE_DIR}/bindings.cpp")

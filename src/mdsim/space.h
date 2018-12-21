@@ -3,6 +3,7 @@
 
 #include "parameters.h"
 #include <math.h>
+#include <algorithm>
 
 class Space {
   private:
@@ -18,6 +19,7 @@ class Space {
 
     void CalculateUnitCell();
   public:
+    Space();
     void PeriodicBCs(const double r[], double s[]);
     void Init(parameters * params);
 };

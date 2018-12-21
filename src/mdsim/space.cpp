@@ -43,6 +43,14 @@ namespace {
   }
 } // namespace
 
+Space::Space() {
+  std::fill(uc_, uc_+9, 0.0);
+  std::fill(uc_inv_, uc_inv_+9, 0.0);
+  std::fill(a_, a_+9, 0.0);
+  std::fill(b_, b_+9, 0.0);
+  std::fill(a_perp_, a_perp_+3, 0.0);
+}
+
 void Space::Init(parameters * params) {
   n_dim_ = params->n_dim;
   n_periodic_ = params->n_periodic;

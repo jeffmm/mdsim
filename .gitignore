@@ -7,3 +7,4 @@ _generate/
 *.egg-info
 *.swp
 *.ipynb_checkpoints
+tests/bin/

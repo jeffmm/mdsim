@@ -16,7 +16,7 @@ class Particle {
            rad_ = 1,
            delta_ = 0.001;
 
-    //RNG rng_;
+    RNG rng_;
     parameters * params_;
     void InitRandom();
 

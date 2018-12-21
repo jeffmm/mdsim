@@ -17,5 +17,3 @@ void MDSim::Run() {
   sim_.Run();
 }
 
-
-

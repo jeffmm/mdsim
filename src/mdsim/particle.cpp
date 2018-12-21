@@ -4,8 +4,8 @@ void Particle::Init(parameters * params) {
   params_ = params;
   n_dim_ = params_->n_dim;
   delta_ = params_->delta;
-  //rng_.Init(params_->seed);
-  //params_->seed = gsl_rng_get(rng_.r);
+  rng_.InitCold(params_->seed);
+  params_->seed = (long) (1e4*rng_.JKISS()+rng_.JKISS());
   InitRandom();
 }
 
@@ -32,14 +32,14 @@ void Particle::SetVelocity(const double v[]) {
 }
 
 void Particle::InitRandom() {
-  //rng_.RandomUniformVector(n_dim_,pos_);
-  //for (int i=0; i<n_dim_; ++i) {
-    //pos_[i] = pos_[i] * params_->box_size;
-  //}
-  //rng_.RandomUnitVector(n_dim_, vel_);
-  //for (int i=0; i<n_dim_; ++i) {
-    //vel_[i] = vel_[i] * params_->velocity;
-  //}
+  rng_.RandomUniformVector(n_dim_,pos_);
+  for (int i=0; i<n_dim_; ++i) {
+    pos_[i] = pos_[i] * params_->box_size;
+  }
+  rng_.RandomUnitVector(n_dim_, vel_);
+  for (int i=0; i<n_dim_; ++i) {
+    vel_[i] = vel_[i] * params_->velocity;
+  }
 }
 
 double Particle::GetVelocitySquared() {

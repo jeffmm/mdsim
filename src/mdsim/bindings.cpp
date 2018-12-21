@@ -16,17 +16,17 @@ PYBIND11_MODULE(mdsim, m) {
         Params
         Sim
     )pbdoc";
+    py::class_<RNG>(m, "RNG")
+        .def(py::init<>())
+        .def("initCold", &RNG::InitCold)
+        .def("init", &RNG::Init)
+        .def("randUniform", &RNG::RandomUniform)
+        .def("randUniformDbl", &RNG::RandomUniformDbl)
+        .def("randInt", &RNG::RandInt)
+        .def("randGaussian", &RNG::RandomGaussian)
+        .def("randUnitVector", &RNG::RandomUnitVector)
+        .def("randUniformVector", &RNG::RandomUniformVector);
 
-    //py::class_<Particle>(m, "Particle")
-        //.def(py::init<const double, const double, const double, const double>())
-        //.def("setRadius", &Particle::setRadius)
-        //.def("setPositionX", &Particle::setPosition)
-        //.def("getRadius", &Particle::getRadius)
-        //.def("getPositionX", &Particle::getPositionX)
-        //.def("getPositionY", &Particle::getPositionY)
-        //.def("getPositionZ", &Particle::getPositionZ)
-        //.def("getStatus", &Particle::getStatus);
-    //m.attr("Params",)
     py::class_<parameters>(m, "Params", R"pbdoc(
         Simulation parameters for MDSim.
 
@@ -91,6 +91,7 @@ PYBIND11_MODULE(mdsim, m) {
       .def("runSimulation", &MDSim::Run,R"pbdoc(
         Run the simulation.
       )pbdoc");
+
 
 
 #ifdef VERSION_INFO

@@ -22,6 +22,7 @@ class Space {
     Space();
     void PeriodicBCs(const double r[], double s[]);
     void Init(parameters * params);
+    const double GetVolume() const { return volume_; }
 };
 
 #endif // _MDSIM_SPACE_H_

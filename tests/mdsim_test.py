@@ -15,7 +15,7 @@ class MainTest(unittest.TestCase):
         # Number of random numbers to generate for statistics. Error should
         # scale as 1/sqrt(N), so select a large N and check that statistical
         # variances match expected theoretical variances for given distribution
-        # out to the tenths place.
+        # (out to the tenths decimal place).
         N = 100000
         # Check uniform distribution matches expected variance V=1/12
         x = np.array([rng.randUniform() for i in range(N)])

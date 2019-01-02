@@ -31,8 +31,8 @@ PYBIND11_MODULE(mdsim, m) {
         Simulation parameters for MDSim.
 
         Can initialize with n_dim, n_periodic,
-        n_particles, n_steps, box_size, and delta
-        (int, int, int, int, float, float).
+        n_particles, n_steps, box_size, delta, noise, velocity, and cutoff
+        (int, int, int, int, float, float, float, float, float).
 
         Defaults are:
           n_dim = 3
@@ -43,6 +43,7 @@ PYBIND11_MODULE(mdsim, m) {
           delta = 0.001
           noise = 0.2
           velocity = 10
+          cutoff = 3
 
         Use setter functions to change parameters
         from defaults:
@@ -54,13 +55,15 @@ PYBIND11_MODULE(mdsim, m) {
           setDelta(float)
           setNoise(float)
           setVelocity(float)
+          setCutoff(float)
     )pbdoc")
-      .def(py::init<long,int,int,int,int,double,double,double,double>(),
+      .def(py::init<long,int,int,int,int,double,double,double,double,double>(),
           py::arg("sd")=777777,
           py::arg("ndim")=3, py::arg("nper")=3,
           py::arg("npart")=10, py::arg("nstep")=1000,
           py::arg("bs")=100, py::arg("dlt")=0.001,
-          py::arg("ns")=0.2, py::arg("vel")=10)
+          py::arg("ns")=0.2, py::arg("vel")=10,
+          py::arg("cut")=3)
       .def("setSeed",&parameters::SetSeed)
       .def("setDim",&parameters::SetDim)
       .def("setPeriodic",&parameters::SetPeriodic)
@@ -69,8 +72,8 @@ PYBIND11_MODULE(mdsim, m) {
       .def("setBoxSize",&parameters::SetBoxSize)
       .def("setDelta",&parameters::SetDelta)
       .def("setNoise",&parameters::SetNoise)
-      .def("setVelocity",&parameters::SetVelocity);
-
+      .def("setVelocity",&parameters::SetVelocity)
+      .def("setCutoff",&parameters::SetCutoff);
 
     py::class_<MDSim>(m, "Sim", R"pbdoc(
         Simulation object for MDSim.

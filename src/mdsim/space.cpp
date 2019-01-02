@@ -104,4 +104,26 @@ void Space::CalculateUnitCell() {
   }
 }
 
+/* Returns squared minimum distance between two points in any given space */
+double Space::MinDistance(const double r1[], const double s1[], 
+                          const double r2[], const double s2[]) {
+// First handle periodic subspace
+  double ds[3], dr[3];
+  for (int i = 0; i < n_periodic_; ++i) {
+    ds[i] = s2[i] - s1[i];
+    ds[i] -= nint(ds[i]);
+  }
+  for (int i = 0; i < n_periodic_; ++i) {
+    dr[i] = 0.0;
+    for (int j = 0; j < n_periodic_; ++j)
+      dr[i] += uc_[n_dim_*i+j] * ds[j];
+  }
+  // Then handle free subspace
+  for (int i = n_periodic_; i < n_dim_; ++i) 
+      dr[i] = r2[i] - r1[i];
+  double dr_mag2 = 0.0;
+  for (int i=0; i<n_dim_; ++i) 
+      dr_mag2 += (dr[i]*dr[i]);
+  return dr_mag2;
+}
 

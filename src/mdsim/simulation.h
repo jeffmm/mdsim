@@ -7,18 +7,29 @@
 #include "space.h"
 
 class Simulation {
-  private:
-    std::vector<Particle> particles_;
+  protected:
+    int n_particles_;
+
+    std::vector<Particle*> particles_;
     parameters * params_;
     Space space_;
 
-    void InitParticles();
-    void UpdateParticlePositions();
+    virtual void InitParticles();
+    virtual void CreateParticles();
+    virtual void UpdateParticlePositions();
+    virtual void CalculateForces();
+
   public:
     Simulation() {}
+    virtual ~Simulation() {
+      for (auto it=particles_.begin(); it!=particles_.end(); ++it) {
+        delete (*it);
+      }
+      particles_.clear();
+    }
+
     void Init(parameters * params);
     void Run();
-
 };
 
 #endif // _MDSIM_SIMULATION_H_

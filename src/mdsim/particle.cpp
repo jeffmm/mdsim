@@ -9,10 +9,6 @@ void Particle::Init(parameters * params) {
   InitRandom();
 }
 
-void Particle::SetRadius(const double r) {
-  rad_ = r;
-}
-
 void Particle::SetScaledPosition(const double sp[]) {
   for (int i=0; i<n_dim_; ++i) {
     spos_[i] = sp[i];
@@ -31,14 +27,40 @@ void Particle::SetVelocity(const double v[]) {
   }
 }
 
+void Particle::SetDirector(const double d[]) {
+  for (int i=0; i<n_dim_; ++i) {
+    dir_[i] = d[i];
+  }
+}
+
+void Particle::SetForce(const double f[]) {
+  for (int i=0; i<n_dim_; ++i) {
+    force_[i] = f[i];
+  }
+}
+
+void Particle::AddForce(const double f[]) {
+  for (int i=0; i<n_dim_; ++i) {
+    force_[i] += f[i];
+  }
+}
+
+void Particle::ZeroForces() {
+  std::fill(force_, force_+3, 0.0);
+  n_interactors_ = 0;
+}
+
 void Particle::InitRandom() {
+  /* Initialize random position within system box */
   rng_.RandomUniformVector(n_dim_,pos_);
   for (int i=0; i<n_dim_; ++i) {
     pos_[i] = pos_[i] * params_->box_size;
   }
-  rng_.RandomUnitVector(n_dim_, vel_);
+  /* Initialize random orientation */
+  rng_.RandomUnitVector(n_dim_, dir_);
+  /* Initialize particle velocity along orientation */
   for (int i=0; i<n_dim_; ++i) {
-    vel_[i] = vel_[i] * params_->velocity;
+    vel_[i] = dir_[i] * params_->velocity;
   }
 }
 
@@ -63,8 +85,6 @@ void Particle::GetStatus() {
                         << " " << vel_[1]
                         << " " << vel_[2] <<"}\n";
 }
-
-
 
 /* Naive integrator */
 void Particle::UpdatePosition() {

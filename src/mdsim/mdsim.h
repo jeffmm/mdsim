@@ -1,15 +1,14 @@
 #ifndef _MDSIM_MAIN_H_
 #define _MDSIM_MAIN_H_
 
-#include "simulation.h"
+#include "vicsek_simulation.h"
 
 class MDSim {
   private:
-    Simulation sim_;
+    VicsekSimulation sim_;
     parameters params_;
-    void Init();
   public:
-    MDSim();
+    MDSim() {}
     void SetParams(parameters params);
     void Run();
 };

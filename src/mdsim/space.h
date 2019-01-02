@@ -23,6 +23,8 @@ class Space {
     void PeriodicBCs(const double r[], double s[]);
     void Init(parameters * params);
     const double GetVolume() const { return volume_; }
+    double MinDistance(const double r1[], const double s1[], 
+                       const double r2[], const double s2[]);
 };
 
 #endif // _MDSIM_SPACE_H_

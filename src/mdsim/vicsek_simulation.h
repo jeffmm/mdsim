@@ -3,12 +3,18 @@
 
 #include "simulation.h"
 #include "vicsek_particle.h"
+#include <fstream>
 
 class VicsekSimulation : public Simulation {
   private:
     /* Nothing special: just a simulation with VicsekParticles */
+    std::fstream gpo_file_;
     virtual void CreateParticles();
     virtual void CalculateForces();
+    virtual void RunAnalysis();
+    virtual void InitAnalysis();
+    virtual void FinalAnalysis();
+    void CalculateGlobalPolarOrder();
   public:
     VicsekSimulation() : Simulation() {}
 };

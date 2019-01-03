@@ -27,3 +27,35 @@ void VicsekSimulation::CalculateForces() {
   }
 }
 
+void VicsekSimulation::RunAnalysis() {
+  CalculateGlobalPolarOrder();
+}
+
+void VicsekSimulation::CalculateGlobalPolarOrder() {
+  double3 gpo;
+  std::fill(gpo, gpo+3, 0.0);
+  for (auto it=particles_.begin(); it!=particles_.end(); ++it) {
+    const double3& u = (*it)->GetDirector();
+    for (int i=0; i<n_dim_; ++i) {
+      gpo[i] += u[i];
+    }
+  }
+  double gpo_mag = 0.0;
+  for (int i=0; i<n_dim_; ++i) {
+    gpo[i] /= n_particles_;
+    gpo_mag += gpo[i]*gpo[i];
+  }
+  gpo_mag = sqrt(gpo_mag);
+  gpo_file_ << gpo_mag << " ";
+}
+
+void VicsekSimulation::InitAnalysis() {
+  std::string fname = "vicsek_global_polar_order.dat";
+  gpo_file_.open(fname, std::ios::out);
+}
+
+void VicsekSimulation::FinalAnalysis() {
+  if (gpo_file_.is_open()) {
+    gpo_file_.close();
+  }
+}

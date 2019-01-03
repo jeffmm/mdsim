@@ -54,7 +54,20 @@ Space::Space() {
 void Space::Init(parameters * params) {
   n_dim_ = params->n_dim;
   n_periodic_ = params->n_periodic;
+  if (n_dim_ != 2 && n_dim_ != 3) {
+    fprintf(stderr, "ERROR: Dimensionality must be equal to 2 or 3.\n");
+    exit(1);
+  }
+  if (n_periodic_ > n_dim_) {
+    n_periodic_ = n_dim_;
+  }
+  if (n_periodic_ < 0) {
+    n_periodic_ = 0;
+  }
   box_size_ = params->box_size;
+  if (box_size_ < 0) {
+    fprintf(stderr, "ERROR: System box size must be positive\n");
+  }
 
   // No skewed unit cells for now
   for (int i=0; i<n_dim_; ++i) {

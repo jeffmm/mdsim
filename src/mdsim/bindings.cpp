@@ -30,11 +30,12 @@ PYBIND11_MODULE(mdsim, m) {
     py::class_<parameters>(m, "Params", R"pbdoc(
         Simulation parameters for MDSim.
 
-        Can initialize with n_dim, n_periodic,
-        n_particles, n_steps, box_size, delta, noise, velocity, and cutoff
-        (int, int, int, int, float, float, float, float, float).
+        Can initialize with seed, n_dim, n_periodic, n_particles, n_steps,
+        box_size, delta, noise, velocity, and cutoff
+        (long, int, int, int, int, float, float, float, float, float).
 
         Defaults are:
+          seed = 777777
           n_dim = 3
           n_periodic = 3
           n_particles = 10
@@ -47,6 +48,7 @@ PYBIND11_MODULE(mdsim, m) {
 
         Use setter functions to change parameters
         from defaults:
+          setSeed(long)
           setDim(int)
           setPeriodic(int)
           setNumParticles(int)

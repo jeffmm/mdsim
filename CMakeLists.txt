@@ -14,9 +14,11 @@ set(SOURCES "${SOURCE_DIR}/mdsim.cpp"
             "${SOURCE_DIR}/simulation.cpp"
             "${SOURCE_DIR}/vicsek_simulation.cpp"
             "${SOURCE_DIR}/vicsek_particle.cpp")
+            #"${SOURCE_DIR}/main.cpp")
 
 add_subdirectory(lib/pybind11)
 pybind11_add_module(mdsim ${SOURCES} "${SOURCE_DIR}/bindings.cpp")
+#pybind11_add_module(mdsim ${SOURCES})
 
 set(TEST_DIR "tests")
 set(TESTS ${SOURCES}

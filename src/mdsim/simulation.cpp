@@ -4,6 +4,7 @@
 void Simulation::Init(parameters * params) {
   params_ = params;
   n_particles_ = params_->n_particles;
+  n_dim_ = params_->n_dim;
   space_.Init(params_);
   CreateParticles();
   InitParticles();
@@ -21,23 +22,23 @@ void Simulation::InitParticles() {
     (*it)->Init(params_);
 
     /* Update periodic boundary conditions */
-    double ds[3];
+    double ds[3] = {0,0,0};
     space_.PeriodicBCs((*it)->GetPosition(), ds);
     (*it)->SetScaledPosition(ds);
   }
 }
 
 void Simulation::Run() {
-  std::cout << "Beginning simulation\n";
+  InitAnalysis();
   for (int i = 0; i < params_->n_steps; ++i) {
     CalculateForces();
     UpdateParticlePositions();
+    /* Just do analyses every 100 steps for now */
+    if (i%100 == 0) {
+      RunAnalysis();
+    }
   }
-  std::cout << "Simulation complete\n";
-  std::cout << "Particles reporting\n";
-  for (auto it = particles_.begin(); it != particles_.end(); ++it) {
-    (*it)->GetStatus();
-  }
+  FinalAnalysis();
 }
 
 void Simulation::CalculateForces() { 
@@ -50,7 +51,7 @@ void Simulation::UpdateParticlePositions() {
     (*it)->UpdatePosition();
 
     /* Update periodic boundary conditions */
-    double ds[3];
+    double ds[3] = {0,0,0};
     space_.PeriodicBCs((*it)->GetPosition(), ds);
     (*it)->SetScaledPosition(ds);
   }

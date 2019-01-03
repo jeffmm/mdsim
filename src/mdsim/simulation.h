@@ -8,7 +8,8 @@
 
 class Simulation {
   protected:
-    int n_particles_;
+    int n_particles_,
+        n_dim_;
 
     std::vector<Particle*> particles_;
     parameters * params_;
@@ -18,6 +19,9 @@ class Simulation {
     virtual void CreateParticles();
     virtual void UpdateParticlePositions();
     virtual void CalculateForces();
+    virtual void InitAnalysis() {}
+    virtual void RunAnalysis() {}
+    virtual void FinalAnalysis() {}
 
   public:
     Simulation() {}

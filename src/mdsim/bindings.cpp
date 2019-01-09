@@ -59,13 +59,13 @@ PYBIND11_MODULE(mdsim, m) {
           setVelocity(float)
           setCutoff(float)
     )pbdoc")
-      .def(py::init<long,int,int,int,int,double,double,double,double,double>(),
+      .def(py::init<long,int,int,int,int,double,double,double,double,double,int>(),
           py::arg("sd")=777777,
           py::arg("ndim")=3, py::arg("nper")=3,
           py::arg("npart")=10, py::arg("nstep")=1000,
           py::arg("bs")=100, py::arg("dlt")=0.001,
           py::arg("ns")=0.2, py::arg("vel")=10,
-          py::arg("cut")=3)
+          py::arg("cut")=3, py::arg("smpl")=10)
       .def("setSeed",&parameters::SetSeed)
       .def("setDim",&parameters::SetDim)
       .def("setPeriodic",&parameters::SetPeriodic)
@@ -75,7 +75,8 @@ PYBIND11_MODULE(mdsim, m) {
       .def("setDelta",&parameters::SetDelta)
       .def("setNoise",&parameters::SetNoise)
       .def("setVelocity",&parameters::SetVelocity)
-      .def("setCutoff",&parameters::SetCutoff);
+      .def("setCutoff",&parameters::SetCutoff)
+      .def("setSampleRate",&parameters::SetSampleRate);
 
     py::class_<MDSim>(m, "Sim", R"pbdoc(
         Simulation object for MDSim.

@@ -7,4 +7,6 @@ _generate/
 *.egg-info
 *.swp
 *.ipynb_checkpoints
+*.dat
+mdsim_debug
 tests/bin/

@@ -33,8 +33,7 @@ void Simulation::Run() {
   for (int i = 0; i < params_->n_steps; ++i) {
     CalculateForces();
     UpdateParticlePositions();
-    /* Just do analyses every 100 steps for now */
-    if (i%100 == 0) {
+    if (i%params_->sample == 0) {
       RunAnalysis();
     }
   }

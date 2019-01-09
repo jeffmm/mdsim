@@ -58,7 +58,13 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
         # Copy *_test file to tests directory
         test_bin = os.path.join(self.build_temp, 'mdsim_test')
+        debug_bin = os.path.join(self.build_temp, 'mdsim_debug')
         self.copy_test_file(test_bin)
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        dest_file = os.path.join(current_dir, os.path.basename(debug_bin))
+        print("copying {} -> {}".format(debug_bin, dest_file))
+        copyfile(debug_bin, dest_file)
+        copymode(debug_bin, dest_file)
         print() # Add empty line for nicer output
 
     def copy_test_file(self, src_file):

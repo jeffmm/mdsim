@@ -29,5 +29,5 @@ set(TESTS ${SOURCES}
 
 #include_directories(lib/Catch2/single_include/catch2)
 add_executable("${PROJECT_NAME}_test" ${TESTS})
-add_executable("${PROJECT_NAME}_debug" ${SOURCES} "${SOURCE_DIR}/main.cpp")
+add_executable("${PROJECT_NAME}_debug" ${SOURCES} "${SOURCE_DIR}/debug.cpp")
 

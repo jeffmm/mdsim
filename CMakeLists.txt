@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 
-set(SOURCE_DIR "src/mdsim")
+set(SOURCE_DIR "mdsim/simulation")
 include_directories(${SOURCE_DIR})
 
 set(SOURCES "${SOURCE_DIR}/mdsim.cpp"
@@ -16,16 +16,18 @@ set(SOURCES "${SOURCE_DIR}/mdsim.cpp"
             "${SOURCE_DIR}/vicsek_particle.cpp")
             #"${SOURCE_DIR}/main.cpp")
 
-add_subdirectory(lib/pybind11)
+#add_subdirectory(lib/pybind11)
+find_package(Catch2 REQUIRED)
+find_package(pybind11 REQUIRED)
 pybind11_add_module(mdsim ${SOURCES} "${SOURCE_DIR}/bindings.cpp")
 #pybind11_add_module(mdsim ${SOURCES})
 
-set(TEST_DIR "tests")
+set(TEST_DIR "mdsim/simulation/tests")
 set(TESTS ${SOURCES}
   "${TEST_DIR}/test_main.cpp"
   "${TEST_DIR}/test_mdsim.cpp")
 
-include_directories(lib/Catch2/single_include/catch2)
+#include_directories(lib/Catch2/single_include/catch2)
 add_executable("${PROJECT_NAME}_test" ${TESTS})
 add_executable("${PROJECT_NAME}_debug" ${SOURCES} "${SOURCE_DIR}/main.cpp")
 

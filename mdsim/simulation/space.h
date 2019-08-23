@@ -4,6 +4,7 @@
 #include "parameters.h"
 #include <math.h>
 #include <algorithm>
+#include <cstdio>
 
 class Space {
   private:

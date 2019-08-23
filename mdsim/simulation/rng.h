@@ -4,6 +4,7 @@
 #include <iostream>
 #include <math.h>
 #include <float.h>
+#include <climits>
 
 /* Public domain code for JKISS RNG found here:
  * http://www0.cs.ucl.ac.uk/staff/d.jones/GoodPracticeRNG.pdf */
